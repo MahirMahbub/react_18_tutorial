@@ -1,6 +1,7 @@
 // import ListGroup from "./components/ListGroup.tsx";
 import  {useState} from "react";
-import GameButton from "./components/GameButton.tsx";
+// import GameButton from "./components/GameButton.tsx";
+import PizzaButton from "./components/PizzaButton.tsx";
 // import Alert from "./components/Alert.tsx";
 
 // function App() {
@@ -73,28 +74,48 @@ import GameButton from "./components/GameButton.tsx";
 //     )
 // }
 
+// const App = () => {
+//     const [game, setGame] = useState({
+//         id: 1,
+//         player: {
+//             name: 'John',
+//         }
+//     });
+//     const onClick = () => {
+//         setGame({
+//             ...game,
+//             player: {
+//                 ...game.player,
+//                 name: 'Jane'
+//             }
+//         });
+//         console.log(game);
+//     }
+//
+//     return (
+//         <div>
+//             <GameButton onClick={onClick} name={game.player.name}/>
+//         </div>
+//     )
+// }
+
 const App = () => {
-    const [game, setGame] = useState({
-        id: 1,
-        player: {
-            name: 'John',
-        }
+    const [pizza, setPizza] = useState({
+        name: 'Spicy Pepperoni',
+        toppings: ['pepperoni', 'cheese', 'jalapenos']
     });
+
     const onClick = () => {
-        setGame({
-            ...game,
-            player: {
-                ...game.player,
-                name: 'Jane'
-            }
-        });
-        console.log(game);
+        setPizza({...pizza, toppings: [...pizza.toppings, 'mushrooms']});
+        {console.log(pizza)}
     }
 
     return (
         <div>
-            <GameButton onClick={onClick} name={game.player.name}/>
+            <PizzaButton onClick={onClick}/>
+
         </div>
     )
 }
+
 export default App;
