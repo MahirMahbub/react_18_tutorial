@@ -1,7 +1,6 @@
 // import ListGroup from "./components/ListGroup.tsx";
-import Button from "./components/Button.tsx";
-import {useState} from "react";
-import ButtonAlert from "./components/ButtonAlert.tsx";
+import  {useState} from "react";
+import GameButton from "./components/GameButton.tsx";
 // import Alert from "./components/Alert.tsx";
 
 // function App() {
@@ -58,18 +57,43 @@ import ButtonAlert from "./components/ButtonAlert.tsx";
 //     );
 // }
 
+// const App = () => {
+//     // const [firstName, setFirstName] = useState('');
+//     // const [lastName, setLastName] = useState('');
+//     const [person, setPerson] = useState({
+//         firstName: '',
+//         lastName: ''
+//     })
+//     const [isLoading, setIsLoading] = useState(false);
+//     return (
+//         <div>
+//             {/*{firstName} {lastName}*/}
+//             {person.firstName} {person.lastName}
+//         </div>
+//     )
+// }
+
 const App = () => {
-    // const [firstName, setFirstName] = useState('');
-    // const [lastName, setLastName] = useState('');
-    const [person, setPerson] = useState({
-        firstName: '',
-        lastName: ''
-    })
-    const [isLoading, setIsLoading] = useState(false);
+    const [game, setGame] = useState({
+        id: 1,
+        player: {
+            name: 'John',
+        }
+    });
+    const onClick = () => {
+        setGame({
+            ...game,
+            player: {
+                ...game.player,
+                name: 'Jane'
+            }
+        });
+        console.log(game);
+    }
+
     return (
         <div>
-            {/*{firstName} {lastName}*/}
-            {person.firstName} {person.lastName}
+            <GameButton onClick={onClick} name={game.player.name}/>
         </div>
     )
 }
