@@ -41,20 +41,36 @@ import ButtonAlert from "./components/ButtonAlert.tsx";
 //     );
 // }
 
+// const App = () => {
+//     const [isClickedButton, setIsClickedButton] = useState(false);
+//     return (
+//         <div>
+//
+//             {isClickedButton && <ButtonAlert onClose={()=> setIsClickedButton(false)} children={'Button Clicked'}/>}
+//             {/*<Alert type={'success'} children={'My Alert'}/>*/}
+//             <Button onClick={() =>
+//                 setIsClickedButton(true)
+//             } color='warning'
+//             >
+//                 My Button
+//             </Button>
+//         </div>
+//     );
+// }
+
 const App = () => {
-    const [isClickedButton, setIsClickedButton] = useState(false);
+    // const [firstName, setFirstName] = useState('');
+    // const [lastName, setLastName] = useState('');
+    const [person, setPerson] = useState({
+        firstName: '',
+        lastName: ''
+    })
+    const [isLoading, setIsLoading] = useState(false);
     return (
         <div>
-
-            {isClickedButton && <ButtonAlert onClose={()=> setIsClickedButton(false)} children={'Button Clicked'}/>}
-            {/*<Alert type={'success'} children={'My Alert'}/>*/}
-            <Button onClick={() =>
-                setIsClickedButton(true)
-            } color='warning'
-            >
-                My Button
-            </Button>
+            {/*{firstName} {lastName}*/}
+            {person.firstName} {person.lastName}
         </div>
-    );
+    )
 }
 export default App;
