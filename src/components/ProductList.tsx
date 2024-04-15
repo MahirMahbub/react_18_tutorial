@@ -1,15 +1,15 @@
 import {useEffect, useState} from "react";
- // interface Product{
- //    id: number;
- //    title: string;
- //    price: number;
- //    description: string;
- //    category: string;
- //    image: string;
- // }
+ interface Product{
+    id: number;
+    title: string;
+    price: number;
+    description: string;
+    category: string;
+    image: string;
+ }
 
 export const ProductList = () => {
-    const [products, setProducts] = useState([])
+    const [products, setProducts] = useState<Product[]>([])
     const [selectedCategory, setSelectedCategory] = useState("All Items");
     useEffect(() => {
         fetch('https://fakestoreapi.com/products')
