@@ -1,7 +1,8 @@
 // import ListGroup from "./components/ListGroup.tsx";
-import  {useState} from "react";
+// import  {useState} from "react";
 // import GameButton from "./components/GameButton.tsx";
-import PizzaButton from "./components/PizzaButton.tsx";
+// import PizzaButton from "./components/PizzaButton.tsx";
+import Form from "./components/Form.tsx";
 // import Alert from "./components/Alert.tsx";
 
 // function App() {
@@ -99,23 +100,30 @@ import PizzaButton from "./components/PizzaButton.tsx";
 //     )
 // }
 
+// const App = () => {
+//     const [pizza, setPizza] = useState({
+//         name: 'Spicy Pepperoni',
+//         toppings: ['pepperoni', 'cheese', 'jalapenos']
+//     });
+//
+//     const onClick = () => {
+//         setPizza({...pizza, toppings: [...pizza.toppings, 'mushrooms']});
+//         {console.log(pizza)}
+//     }
+//
+//     return (
+//         <div>
+//             <PizzaButton onClick={onClick}/>
+//
+//         </div>
+//     )
+// }
+
 const App = () => {
-    const [pizza, setPizza] = useState({
-        name: 'Spicy Pepperoni',
-        toppings: ['pepperoni', 'cheese', 'jalapenos']
-    });
-
-    const onClick = () => {
-        setPizza({...pizza, toppings: [...pizza.toppings, 'mushrooms']});
-        {console.log(pizza)}
-    }
-
     return (
         <div>
-            <PizzaButton onClick={onClick}/>
-
+            <Form/>
         </div>
-    )
+    );
 }
-
 export default App;
