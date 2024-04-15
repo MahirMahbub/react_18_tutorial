@@ -2,7 +2,10 @@
 // import  {useState} from "react";
 // import GameButton from "./components/GameButton.tsx";
 // import PizzaButton from "./components/PizzaButton.tsx";
-import Form from "./components/Form.tsx";
+import ExpenseList from "./expense-tracker/components/ExpenseList.tsx";
+import {useState} from "react";
+import {ExpenseFilter} from "./expense-tracker/components/ExpenseFilter.tsx";
+import ExpenseForm from "./expense-tracker/components/ExpenseForm.tsx";
 // import Alert from "./components/Alert.tsx";
 
 // function App() {
@@ -120,9 +123,25 @@ import Form from "./components/Form.tsx";
 // }
 
 const App = () => {
+    const [selectedCategory, setSelectedCategory] = useState("All Items");
+    const [expenses, setExpenses] = useState([
+        {id: 1, description: 'Rent', amount: 1000, category: 'Housing'},
+        {id: 2, description: 'Current', amount: 1000, category: 'Electricity'},
+        {id: 3, description: 'Groceries', amount: 100, category: 'Food'},
+        {id: 4, description: 'Gas', amount: 40, category: 'Transportation'},
+        {id: 5, description: 'Fruits', amount: 50, category: 'Food'},
+    ]);
+
+    const visibleExpenses = selectedCategory!=="All Items" ? expenses.filter(e => e.category === selectedCategory) : expenses;
     return (
         <div>
-            <Form/>
+            <div className="mb-5">
+                <ExpenseForm expenses={expenses} setExpenses={setExpenses}/>
+            </div>
+            <div className="mb-3">
+                <ExpenseFilter onSelectCategory={(category) => setSelectedCategory(category)}/>
+            </div>
+            <ExpenseList expenses={visibleExpenses} onDelete={(id) => setExpenses(expenses.filter(e=> e.id !==id))}/>
         </div>
     );
 }
