@@ -37,7 +37,7 @@ const Form = () => {
                 {formState.errors.age && (<p className={"text-danger"}>{formState.errors.age.message}</p>)}
             </p>
         </div>
-        <button className="btn btn-primary" type={"submit"}>Submit</button>
+        <button disabled={!formState.isValid} className="btn btn-primary" type={"submit"}>Submit</button>
     </form>);
 }
 
