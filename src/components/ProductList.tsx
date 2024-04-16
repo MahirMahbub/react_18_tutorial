@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import axios, {AxiosError} from "axios";
+import axios, {CanceledError} from "axios";
 
 interface Product {
     id: number;
@@ -21,19 +21,18 @@ export const ProductList = () => {
     // }, []);
     // Create an axios call to fetch the data from the API
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await axios.get('https://fakestoreapi.com/products');
-                setProducts(response.data);
-            } catch (error) {
-                setError((error as AxiosError).message);
-            }
-        }
-        fetchData();
+        const controller = new AbortController();
+        axios.get('https://fakestoreapi.com/products', {signal: controller.signal})
+            .then(response => setProducts(response.data))
+            .catch(error => {
+                if (error instanceof CanceledError) {
+                    return
+                } else
+                setError(error.message)
+            });
+        return () => controller.abort();
     }, []);
-
     const uniqueCategories: string[] = products ? ["All Items", ...new Set(products.map(product => product.category))] : [];
-
 
     const visibleProducts = selectedCategory !== "All Items" ? products.filter(p => p.category === selectedCategory) : products;
     if (error) {
