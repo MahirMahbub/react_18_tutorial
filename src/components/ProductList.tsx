@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react";
 // import axios, {CanceledError} from "axios";
-import apiClient, {CanceledError} from "../services/api-client.ts";
+import {CanceledError} from "../services/api-client.ts";
+import userService from "../services/user-service.ts";
 
 interface Product {
     id: number;
@@ -23,10 +24,9 @@ export const ProductList = () => {
     // }, []);
     // Create an axios call to fetch the data from the API
     useEffect(() => {
-        const controller = new AbortController();
         setLoading(true);
-        apiClient.get('/products', {signal: controller.signal})
-            .then(response => setProducts(response.data)).then(() => setLoading(false))
+        const {request, cancel} = userService.getUsers()
+        request.then(response => setProducts(response.data)).then(() => setLoading(false))
             .catch(error => {
                 if (error instanceof CanceledError) {
                     return
@@ -34,7 +34,7 @@ export const ProductList = () => {
                     setError(error.message)
                 setLoading(false)
             });
-        return () => controller.abort();
+        return () => cancel();
     }, []);
     const uniqueCategories: string[] = products ? ["All Items", ...new Set(products.map(product => product.category))] : [];
 
