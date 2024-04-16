@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import axios from "axios";
+import axios, {AxiosError} from "axios";
 
 interface Product {
     id: number;
@@ -21,9 +21,17 @@ export const ProductList = () => {
     // }, []);
     // Create an axios call to fetch the data from the API
     useEffect(() => {
-        axios.get('https://fakestoreapi.com/prosducts')
-            .then(response => setProducts(response.data)).catch(error => setError(error.message));
+        const fetchData = async () => {
+            try {
+                const response = await axios.get('https://fakestoreapi.com/products');
+                setProducts(response.data);
+            } catch (error) {
+                setError((error as AxiosError).message);
+            }
+        }
+        fetchData();
     }, []);
+
     const uniqueCategories: string[] = products ? ["All Items", ...new Set(products.map(product => product.category))] : [];
 
 
