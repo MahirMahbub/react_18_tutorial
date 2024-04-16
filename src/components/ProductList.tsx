@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
-import axios, {CanceledError} from "axios";
-
+// import axios, {CanceledError} from "axios";
+import apiClient, {CanceledError} from "../services/api-client.ts";
 
 interface Product {
     id: number;
@@ -25,7 +25,7 @@ export const ProductList = () => {
     useEffect(() => {
         const controller = new AbortController();
         setLoading(true);
-        axios.get('https://fakestoreapi.com/products', {signal: controller.signal})
+        apiClient.get('/products', {signal: controller.signal})
             .then(response => setProducts(response.data)).then(() => setLoading(false))
             .catch(error => {
                 if (error instanceof CanceledError) {
