@@ -1,4 +1,8 @@
-# React + TypeScript + Vite
+## Source code for React 18 for Beginners by H. Moshe
+A step-by-step guide to building web apps with React 18+ and TypeScript
+
+Visit the [Course](https://codewithmosh.com/p/ultimate-react-part1).
+## React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
