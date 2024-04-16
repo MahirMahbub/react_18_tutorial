@@ -25,7 +25,7 @@ export const ProductList = () => {
     // Create an axios call to fetch the data from the API
     useEffect(() => {
         setLoading(true);
-        const {request, cancel} = userService.getUsers()
+        const {request, cancel} = userService.gets<Product>()
         request.then(response => setProducts(response.data)).then(() => setLoading(false))
             .catch(error => {
                 if (error instanceof CanceledError) {
