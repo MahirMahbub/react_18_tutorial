@@ -2,7 +2,8 @@
 // import  {useState} from "react";
 // import GameButton from "./components/GameButton.tsx";
 // import PizzaButton from "./components/PizzaButton.tsx";
-import {ProductList} from "./components/ProductList.tsx";
+// import {ProductList} from "./components/ProductList.tsx";
+import TodoList from "./components/react-query/TodoList.tsx";
 // import Alert from "./components/Alert.tsx";
 
 // function App() {
@@ -145,8 +146,9 @@ import {ProductList} from "./components/ProductList.tsx";
 const App = () => {
     return (
         <div>
-            <h1>Product Tracker</h1>
-            <ProductList />
+            {/*<h1>Product Tracker</h1>*/}
+            {/*<ProductList />*/}
+            <TodoList/>
         </div>
     );
 }
