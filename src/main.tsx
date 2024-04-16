@@ -6,7 +6,9 @@ import App from './App.tsx'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './index.css'
 
-const queryClient = new QueryClient()
+const queryClient = new QueryClient(
+
+)
 ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
         <QueryClientProvider client={queryClient}>
