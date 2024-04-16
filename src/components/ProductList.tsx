@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react";
 import axios, {CanceledError} from "axios";
 
+
 interface Product {
     id: number;
     title: string;
@@ -14,6 +15,7 @@ export const ProductList = () => {
     const [products, setProducts] = useState<Product[]>([])
     const [selectedCategory, setSelectedCategory] = useState("All Items");
     const [error, setError] = useState<string>("");
+    const [loading, setLoading] = useState<boolean>(false);
     // useEffect(() => {
     //     fetch('https://fakestoreapi.com/products')
     //         .then(response => response.json())
@@ -22,37 +24,44 @@ export const ProductList = () => {
     // Create an axios call to fetch the data from the API
     useEffect(() => {
         const controller = new AbortController();
+        setLoading(true);
         axios.get('https://fakestoreapi.com/products', {signal: controller.signal})
-            .then(response => setProducts(response.data))
+            .then(response => setProducts(response.data)).then(() => setLoading(false))
             .catch(error => {
                 if (error instanceof CanceledError) {
                     return
                 } else
-                setError(error.message)
+                    setError(error.message)
+                setLoading(false)
             });
         return () => controller.abort();
     }, []);
     const uniqueCategories: string[] = products ? ["All Items", ...new Set(products.map(product => product.category))] : [];
 
     const visibleProducts = selectedCategory !== "All Items" ? products.filter(p => p.category === selectedCategory) : products;
-    if (error) {
-        return <p className="text-danger">{error}</p>
-    }
+    // if (error) {
+    //
+    // }
     return (
         <div>
+
             <select className="form-select" onChange={(event) => setSelectedCategory(event.target.value)}>
                 {uniqueCategories.map(category => (
                     <option key={category} value={category}>{category}</option>
                 ))}
             </select>
-            <h2>Products</h2>
-            <ul>
-                {visibleProducts.map(product => (
-                    <li key={product.id}>{product.title}</li>
-                ))}
+            {loading && <div className="spinner-border"></div>}
+            {!error && !loading ?
+                <>
+                    <h2>Products</h2>
+                    <ul>
+                        {visibleProducts.map(product => (
+                            <li key={product.id}>{product.title}</li>
+                        ))}
 
 
-            </ul>
+                    </ul>
+                </> : <p className="text-danger">{error}</p>}
         </div>
 
     );
