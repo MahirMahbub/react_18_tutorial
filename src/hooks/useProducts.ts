@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import userService from "../services/user-service.ts";
+import userService from "../services/product-service.ts";
 import {CanceledError} from "../services/api-client.ts";
 
 export interface Product {

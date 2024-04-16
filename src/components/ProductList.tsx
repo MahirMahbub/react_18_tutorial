@@ -6,7 +6,8 @@ import useProducts from "../hooks/useProducts.ts";
 
 
 export const ProductList = () => {
-    const {products, error, loading, setProducts, setError} = useProducts();
+    // const {products, error, loading, setProducts, setError} = useProducts();
+    const {products, error, loading} = useProducts();
     const [selectedCategory, setSelectedCategory] = useState("All Items");
     const uniqueCategories: string[] = products ? ["All Items", ...new Set(products.map(product => product.category))] : [];
 
